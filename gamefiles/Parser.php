@@ -27,12 +27,6 @@ for ($i=0; $i<=$counter; $i++)
 
 $statsarray = array_values(array_filter($statsarray));
 
-echo "<br><br>";
-
-print_r($statsarray);
-
-echo "<br><br>";
-
 $counter2 = (sizeof($statsarray));
 
 for ($i=0; $i<=$counter2; $i++)
@@ -41,21 +35,45 @@ for ($i=0; $i<=$counter2; $i++)
 	echo "<br><br>";
 }
 
-/* $counter = (sizeof($statsarray));
-
-for ($i=0; $i<=$counter; $i++)
-{
-	for ($t=0; $t<=$counter; $t++)
-	{
-	$statsarray[$i][$t];
-	echo "<br><br>";
-}
-}
-*/
-
+for ($i=0; $i<$counter2; $i++){
+$statsarray[$i][0] = "'" . $statsarray[$i][0] . "'";
 }
 
+//include("connect.php");
 
-gameStatMaker("GameApril172015");
+for ($i=1; $i<$counter2; $i++) {
+
+	$stat_query;
+	$stat_string = "";
+	$stat_query = implode(",", $statsarray[$i]);
+
+	echo $stat_query;
+	echo "<br>";
+	if ($stat_query) {
+	$stat_string .= $stat_query;
+	}
+
+	echo $stat_query;
+	echo "<br>";
+
+	$columns = "`Name`, `Stat1`, `Stat2`, `Stat3`, `Stat4`, 
+	`Stat5`, `Stat6`, `Stat7`, `Stat8`, `Stat9`, `Stat10`, 
+	`Stat11`, `Stat12`, `Stat13`, `Stat14`, `Stat15`, `Stat16`, 
+	`Stat17`, `Stat18`, `Stat19`, `Stat20`, `Stat21`, `Stat22`, 
+	`Stat23`, `Stat24`, `Stat25`";
+
+	$query = "INSERT INTO gamestats ($columns) VALUES ($stat_query)";
+
+	$result = mysqli_query($connection, $query);
+}
+
+echo "<br><br>";
+
+var_dump($stat_string);
+//$stats_query = implode(",", $statsarray);
+
+}
+
+gameStatMaker("GameApril172015.txt");
 
 ?>
